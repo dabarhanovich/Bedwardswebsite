@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SEO — edit business name, city, and description here
+       ============================================================ -->
+  <title>Load N' Go | Fences, Trees &amp; More</title>
+  <meta name="description" content="Load N' Go builds fences, removes trees, grinds stumps, installs sod, mulch, and gravel, and handles the outdoor projects on your list. Local crew, free quotes." />
+  <link rel="canonical" href="https://www.example.com/" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Load N' Go" />
+  <meta property="og:description" content="Fence building, tree and stump removal, sod, mulch, gravel, landscape design, pressure washing, and general handyman work. Free quotes, fast scheduling." />
+  <meta property="og:url" content="https://www.example.com/" />
+  <meta property="og:image" content="https://www.example.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#546070" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16181a" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+
+  <!-- Local business structured data — update address/phone/hours -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Load N' Go",
+    "telephone": "+1-425-350-3046",
+    "email": "loadngojunkremoval1@gmail.com",
+    "url": "https://www.example.com/",
+    "areaServed": "Monmouth, Salem, Dallas, Albany, Corvallis, McMinnville, and nearby Willamette Valley towns",
+    "priceRange": "$$",
+    "openingHours": "Mo-Sa 07:00-18:00"
+  }
+  </script>
+
+  <!-- Fonts: Inter with system-ui fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Prevent dark-mode flash: apply saved/system theme before paint -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) { /* localStorage unavailable — fall back to light */ }
+    })();
+  </script>
+
+  <!-- Tailwind CSS via Play CDN. Design tokens live in js/tailwind.config.js and css/styles.css. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind.config.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <!-- Skip link for keyboard users -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] btn-primary">Skip to content</a>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header id="site-header" class="sticky top-0 z-50 border-b border-transparent bg-surface/80 backdrop-blur-md transition-[border-color,box-shadow] duration-300">
+    <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between gap-4 lg:h-[72px]">
+
+        <!-- Logo / business name -->
+        <a href="#top" class="flex items-center gap-2.5 rounded-lg" aria-label="Load N' Go — home">
+          <span class="brand-logo-wrap">
+            <img src="images/logo-mark.png" alt="" width="379" height="128" class="brand-logo-mark" />
+          </span>
+          <span class="text-[15px] font-bold tracking-tight text-ink sm:text-base">Load N' Go</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden lg:flex items-center gap-7" aria-label="Primary">
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#work" class="nav-link">Work</a>
+          <a href="#why-us" class="nav-link">Why us</a>
+          <a href="#process" class="nav-link">How it works</a>
+          <a href="#reviews" class="nav-link">Reviews</a>
+          <a href="#service-area" class="nav-link">Service area</a>
+        </nav>
+
+        <!-- Right cluster -->
+        <div class="flex items-center gap-2">
+          <a href="tel:+14253503046" class="hidden md:inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-ink hover:bg-surface-sunken transition-colors">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg>
+            (425) 350-3046
+          </a>
+          <a href="#quote" class="hidden sm:inline-flex btn-primary py-2.5">Get a free quote</a>
+
+          <!-- Theme toggle -->
+          <button id="theme-toggle" type="button" class="btn-ghost h-10 w-10 !px-0 rounded-xl" aria-label="Toggle dark mode" aria-pressed="false">
+            <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+            <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/></svg>
+          </button>
+
+          <!-- Hamburger -->
+          <button id="menu-toggle" type="button" class="btn-ghost h-10 w-10 !px-0 rounded-xl lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path class="menu-open-icon" d="M4 7h16M4 12h16M4 17h16"/>
+              <path class="menu-close-icon hidden" d="M6 6l12 12M18 6 6 18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" data-open="false" class="lg:hidden absolute inset-x-0 top-full border-b border-line bg-surface shadow-lift">
+      <nav class="mx-auto max-w-content px-4 py-4 sm:px-6" aria-label="Mobile">
+        <ul class="flex flex-col">
+          <li><a href="#services" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">Services</a></li>
+          <li><a href="#work" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">Work</a></li>
+          <li><a href="#why-us" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">Why us</a></li>
+          <li><a href="#process" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">How it works</a></li>
+          <li><a href="#reviews" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">Reviews</a></li>
+          <li><a href="#service-area" class="mobile-link block rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-surface-sunken">Service area</a></li>
+        </ul>
+        <div class="mt-3 grid grid-cols-2 gap-2 border-t border-line pt-4">
+          <a href="tel:+14253503046" class="btn-secondary">Call now</a>
+          <a href="#quote" class="mobile-link btn-primary">Free quote</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="flex-1">
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section id="top" class="hero-texture relative overflow-hidden">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 py-16 sm:py-20 lg:grid-cols-12 lg:items-center lg:py-28">
+
+          <div class="lg:col-span-7">
+            <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised px-3 py-1.5 text-xs font-medium text-ink-soft">
+              <span class="h-2 w-2 rounded-full bg-accent-500" aria-hidden="true"></span>
+              Now booking fall projects
+            </div>
+            <h1 class="text-4xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+              The projects you keep putting off, done right the first time.
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
+              Fences, trees, stumps, landscaping, and the rest of the list. One local crew, clear pricing, and work you won't have to redo.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#quote" class="btn-primary px-6 py-3.5 text-base">Get a free quote</a>
+              <a href="tel:+14253503046" class="btn-secondary px-6 py-3.5 text-base">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg>
+                Call (425) 350-3046
+              </a>
+            </div>
+            <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-soft">
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>Local, owner-run crew</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>Quotes within 24 hours</li>
+              <li class="flex items-center gap-2"><svg class="h-4 w-4 text-accent-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>Workmanship guaranteed</li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="relative mx-auto max-w-md">
+              <div class="absolute -inset-4 -z-10 rounded-[2rem] bg-accent-500/10 blur-2xl" aria-hidden="true"></div>
+              <figure class="rounded-3xl border border-line bg-surface-raised p-6 shadow-lift sm:p-7">
+                <figcaption class="flex items-center justify-between">
+                  <span class="text-sm font-semibold text-ink">Recent project</span>
+                  <span class="rounded-full bg-accent-50 px-2.5 py-1 text-xs font-semibold text-accent-600 dark:text-accent-900">Completed</span>
+                </figcaption>
+                <div class="mt-5 grid grid-cols-2 gap-2">
+                  <figure class="relative overflow-hidden rounded-2xl bg-surface-sunken">
+                    <img src="images/work/landscaping-3450.jpg" alt="Dirt side yard being tilled before sod and mulch" width="1500" height="2000" class="aspect-[3/4] w-full object-cover object-center" />
+                    <figcaption class="absolute left-2 top-2 rounded-full border border-line bg-surface-raised/90 px-2 py-0.5 text-xs font-semibold text-ink">Before</figcaption>
+                  </figure>
+                  <figure class="relative overflow-hidden rounded-2xl bg-surface-sunken">
+                    <img src="images/work/landscaping-3456.jpg" alt="New sod lawn and mulch beds along a gray house after a landscaping job" width="1500" height="2000" class="aspect-[3/4] w-full object-cover object-center" />
+                    <figcaption class="absolute left-2 top-2 rounded-full border border-line bg-surface-raised/90 px-2 py-0.5 text-xs font-semibold text-ink">After</figcaption>
+                  </figure>
+                </div>
+                <dl class="mt-5 grid grid-cols-2 gap-3 text-center">
+                  <div class="rounded-xl bg-surface-sunken px-2 py-3">
+                    <dt class="text-xs text-ink-faint">Job</dt>
+                    <dd class="mt-0.5 text-sm font-semibold text-ink">Sod &amp; mulch</dd>
+                  </div>
+                  <div class="rounded-xl bg-surface-sunken px-2 py-3">
+                    <dt class="text-xs text-ink-faint">Finish</dt>
+                    <dd class="mt-0.5 text-sm font-semibold text-ink">New lawn</dd>
+                  </div>
+                </dl>
+                <a href="#work" class="mt-4 inline-flex w-full items-center justify-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+                  See more job photos
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </a>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICES — edit names/descriptions in each <article>
+         ============================================================ -->
+    <section id="services" class="scroll-mt-20 py-20 sm:py-24" aria-labelledby="services-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <h2 id="services-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">What we do</h2>
+          <p class="mt-4 text-lg text-ink-soft">Outdoor work and repairs for homeowners and small properties. If it's not on this list, ask — we probably still do it.</p>
+        </div>
+
+        <div class="reveal mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+          <!-- Service card -->
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l2-3 2 3v12M10 21V9l2-3 2 3v12M16 21V9l2-3 2 3v12M2 13h20M2 18h20"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">Fence building &amp; repair</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">New cedar, vinyl, and chain-link fences, plus gate repair and post replacement. Built straight, set in concrete, and cleaned up when we leave.</p>
+            <a href="#quote" data-service="Fence building & repair" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12c-4 0-7-3-7-7 4 0 7 3 7 7z"/><path d="M12 12c4 0 7-3 7-7-4 0-7 3-7 7z"/><path d="M5 22h14"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">Tree &amp; stump removal</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">Tree felling and haul-away, plus stump and root grinding. Quotes depend on size, access, location, and nearby hazards.</p>
+            <a href="#quote" data-service="Tree & stump removal" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18"/><path d="M5 14h14"/><path d="M7 10h10"/><circle cx="9" cy="6" r="2"/><path d="M9 8v2"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">Sod, mulch &amp; gravel</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">Refresh the yard with new grass, mulch, gravel, and similar materials. Sod includes tilling and soil prep. Mulch can include a weed barrier and a few material options.</p>
+            <a href="#quote" data-service="Sod, mulch & gravel" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17.5 14v7"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">Landscape design</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">Have another layout in mind? We're open to it. Tell us what you want for the yard and we'll plan it out with you.</p>
+            <a href="#quote" data-service="Landscape design" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6l-2 7"/><path d="M10 14 8 3"/><path d="M12 8h9"/><path d="M13 12h7"/><path d="M14 16h5"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">Pressure washing</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">Driveways, patios, siding, decks, and walkways. We match pressure and detergent to the surface so nothing gets etched or stripped.</p>
+            <a href="#quote" data-service="Pressure washing" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+          <article class="group flex flex-col rounded-2xl border border-line bg-surface-raised p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:border-accent-500/40">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-ink">General handyman</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">Deck boards, shed repairs, mailbox posts, screen doors, gutter cleaning, and the rest of the honey-do list. Book a half day and we'll knock out as much as we can.</p>
+            <a href="#quote" data-service="General handyman" class="service-cta mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+              Request a quote
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RECENT WORK — thumbnail grid, lightbox previous/next
+         ============================================================ -->
+    <section id="work" class="scroll-mt-20 py-20 sm:py-24" aria-labelledby="work-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="reveal">
+          <h2 id="work-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Recent work</h2>
+          <p class="mt-4 max-w-2xl text-lg text-ink-soft">Tap a photo to open it. Use previous and next to move through the set.</p>
+          <ul class="mt-12 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-5">
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: dirt side yard being tilled">
+                <img src="images/work/landscaping-3450.jpg" alt="Dirt side yard being tilled before sod and mulch" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: new sod lawn and mulch beds">
+                <img src="images/work/landscaping-3456.jpg" alt="Finished sod lawn and mulch beds along the same gray house" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: tall tree trunk before removal">
+                <img src="images/work/landscaping-3166.jpg" alt="Tall tree trunk left standing after limbs were removed" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: side yard after the trunk was removed">
+                <img src="images/work/landscaping-3302.jpg" alt="Same side yard after the trunk was removed and mulch was spread" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: weedy poolside bed">
+                <img src="images/work/landscaping-3169.jpg" alt="Weedy planting bed beside a pool before cleanup" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: cleaned poolside bed">
+                <img src="images/work/landscaping-3300.jpg" alt="Poolside bed after weeds were pulled and fresh soil was laid" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: bare backyard before sod">
+                <img src="images/work/landscaping-3453.jpg" alt="Bare backyard dirt and patio before sod" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: sod and mulch from the steps">
+                <img src="images/work/landscaping-3460.jpg" alt="Same backyard with new sod and mulch, viewed from the steps" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: overgrown hillside before clearing">
+                <img src="images/work/landscaping-2944.jpg" alt="Overgrown hillside brush above a stone retaining wall" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: hillside after brush was cleared">
+                <img src="images/work/landscaping-2953.jpg" alt="Same hillside after brush was cleared back to bare ground" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: overgrown slope before clearing">
+                <img src="images/work/landscaping-2970.jpg" alt="Tall dry grass covering a slope before clearing" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: slope after clearing">
+                <img src="images/work/landscaping-2969.jpg" alt="Slope after grass and brush were cut back, with a fire hydrant in front" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: dead tree before removal">
+                <img src="images/work/landscaping-3163.jpg" alt="Dead tree standing beside a shed before removal" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: tree work after it came down">
+                <img src="images/work/landscaping-3285.jpg" alt="Crew cutting and stacking the tree after it was taken down" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open before photo: stump before grinding">
+                <img src="images/work/landscaping-2996.jpg" alt="Old stump with new growth before grinding" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">Before</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="work-photo" data-work-photo aria-label="Open after photo: backyard after debris was pulled out">
+                <img src="images/work/landscaping-3001.jpg" alt="Backyard soil after old boards and debris were pulled out" width="1500" height="2000" loading="lazy" decoding="async" />
+                <span class="work-photo-label">After</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHY CHOOSE US
+         ============================================================ -->
+    <section id="why-us" class="scroll-mt-20 bg-surface-sunken py-20 sm:py-24" aria-labelledby="why-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div class="reveal lg:col-span-5">
+            <h2 id="why-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Why neighbors call us back</h2>
+            <p class="mt-4 text-lg text-ink-soft">We're a small, owner-run crew. The person who quotes your job is the person who shows up to do it, and we'd like you to hire us again next season.</p>
+            <a href="#quote" class="btn-primary mt-8">Start with a free quote</a>
+          </div>
+
+          <ul class="reveal grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            <li class="rounded-2xl border border-line bg-surface-raised p-6">
+              <div class="text-accent-600 dark:text-accent-900" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </div>
+              <h3 class="mt-4 font-semibold text-ink">We show up when we say we will</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">You get a scheduled arrival window and a text when we're on the way. If something shifts, you hear from us first.</p>
+            </li>
+            <li class="rounded-2xl border border-line bg-surface-raised p-6">
+              <div class="text-accent-600 dark:text-accent-900" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <h3 class="mt-4 font-semibold text-ink">Workmanship guaranteed</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">If our workmanship fails, we come back and fix it at no charge.</p>
+            </li>
+            <li class="rounded-2xl border border-line bg-surface-raised p-6">
+              <div class="text-accent-600 dark:text-accent-900" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h3 class="mt-4 font-semibold text-ink">Local, not a franchise</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">We live here, work here, and know the soil, drainage, and permit quirks in this area. No call center, no subcontractors.</p>
+            </li>
+            <li class="rounded-2xl border border-line bg-surface-raised p-6">
+              <div class="text-accent-600 dark:text-accent-900" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+              </div>
+              <h3 class="mt-4 font-semibold text-ink">Clear, itemized pricing</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">Written quotes that list materials and labor separately. The price we quote is the price you pay unless you change the scope.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         HOW IT WORKS (numbered because it IS a sequence)
+         ============================================================ -->
+    <section id="process" class="scroll-mt-20 py-20 sm:py-24" aria-labelledby="process-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-2xl">
+          <h2 id="process-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">How it works</h2>
+          <p class="mt-4 text-lg text-ink-soft">Four steps from first call to finished job. Most quotes go out within one business day.</p>
+        </div>
+
+        <ol class="reveal mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <li class="relative rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white">1</span>
+            <h3 class="mt-4 font-semibold text-ink">Tell us about the job</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">Call, text, or use the form below. A couple of photos help us quote faster.</p>
+          </li>
+          <li class="relative rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white">2</span>
+            <h3 class="mt-4 font-semibold text-ink">Get a written quote</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">We visit if needed, then send a fixed price with materials and labor spelled out.</p>
+          </li>
+          <li class="relative rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white">3</span>
+            <h3 class="mt-4 font-semibold text-ink">Pick a date</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">Approve the quote and choose a day that works. We confirm the night before.</p>
+          </li>
+          <li class="relative rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-accent-600 text-sm font-bold text-white">4</span>
+            <h3 class="mt-4 font-semibold text-ink">We do the work</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">We finish, walk it with you, and clean up. You pay when you're happy with it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         REVIEWS — curated quotes stay in the cards below.
+         Fill the data-* attributes on this section:
+           data-google-url / data-yelp-url   exact listing URLs
+           data-google-rating="4.9" data-google-count="24"
+           data-yelp-rating="4.8" data-yelp-count="12"
+         Optional live Google numbers: Place ID + Maps JS key
+         (restrict the key to this domain in Google Cloud).
+         Optional live Yelp sample: paste "Embed review" snippets
+         from Yelp.com into #yelp-embeds.
+         ============================================================ -->
+    <section
+      id="reviews"
+      class="scroll-mt-20 bg-surface-sunken py-20 sm:py-24"
+      aria-labelledby="reviews-heading"
+      data-google-url="https://maps.app.goo.gl/DXfTBZzLSrAyWY1s5"
+      data-google-place-id=""
+      data-google-maps-key=""
+      data-google-rating="5.0"
+      data-google-count="7"
+      data-yelp-url="https://www.yelp.com/biz/load-n-go-monmouth-2"
+      data-yelp-rating="5.0"
+      data-yelp-count="1"
+    >
+      <div class="reveal mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <h2 id="reviews-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">What customers say</h2>
+          <p class="mt-4 text-lg text-ink-soft">Read the latest on Google and Yelp, plus a few notes from recent jobs.</p>
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <a id="google-reviews-card" href="https://maps.app.goo.gl/DXfTBZzLSrAyWY1s5" target="_blank" rel="noopener noreferrer" class="flex gap-4 rounded-2xl border border-line bg-surface-raised p-5 transition-colors hover:border-ink-faint">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-sunken text-ink" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 12h-9"/></svg>
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block font-semibold text-ink">Google</span>
+              <span data-google-score class="mt-1 hidden items-center gap-2 text-sm">
+                <span data-google-stars class="star-rating" aria-hidden="true"></span>
+                <strong data-google-rating-display class="text-ink"></strong>
+                <span data-google-count-display class="text-ink-faint"></span>
+              </span>
+              <span data-google-blurb class="mt-1 block text-sm text-ink-soft">See our latest ratings and reviews on Google.</span>
+              <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+                Read reviews on Google
+                <span class="sr-only"> (opens in a new tab)</span>
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </span>
+            </span>
+          </a>
+
+          <a id="yelp-reviews-card" href="https://www.yelp.com/biz/load-n-go-monmouth-2" target="_blank" rel="noopener noreferrer" class="flex gap-4 rounded-2xl border border-line bg-surface-raised p-5 transition-colors hover:border-ink-faint">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-surface-sunken text-ink" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M5.6 6.2 18.4 17.8M3 12h18M5.6 17.8 18.4 6.2"/></svg>
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block font-semibold text-ink">Yelp</span>
+              <span data-yelp-score class="mt-1 hidden items-center gap-2 text-sm">
+                <span data-yelp-stars class="star-rating" aria-hidden="true"></span>
+                <strong data-yelp-rating-display class="text-ink"></strong>
+                <span data-yelp-count-display class="text-ink-faint"></span>
+              </span>
+              <span data-yelp-blurb class="mt-1 block text-sm text-ink-soft">See our latest ratings and reviews on Yelp.</span>
+              <span class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 dark:text-accent-900">
+                Read reviews on Yelp
+                <span class="sr-only"> (opens in a new tab)</span>
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </span>
+            </span>
+          </a>
+        </div>
+
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <blockquote class="flex flex-col rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="text-amber-500" aria-label="5 out of 5 stars">★★★★★</span>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink">"This was our second time working with Ben because we were so impressed with his work the first time around. After he cleared an area he ended up building the fence we wanted. He showed problem solving skills and worked until the job was done and we were happy. His pricing is more than fair for its value. Quality can't be beat! I have no idea why Yelp says the reviews for his services aren't recommended, but maybe this will make it on there. If you want honest and integrity call Ben. He even put finishing touches of the fence toppers!"</p>
+            <footer class="mt-5 text-sm">
+              <span class="font-semibold text-ink">Megan D.</span>
+              <span class="block text-ink-faint">Fence building · Yelp</span>
+            </footer>
+          </blockquote>
+          <blockquote class="flex flex-col rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="text-amber-500" aria-label="5 out of 5 stars">★★★★★</span>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink">"The best thing I did was to hire Ben and Alex to help with moving. Very professional, quick and efficient with getting the job done. I would hire them again in a heartbeat. Thanks guys!"</p>
+            <footer class="mt-5 text-sm">
+              <span class="font-semibold text-ink">Teri Waters-Dodd</span>
+              <span class="block text-ink-faint">Moving · Google</span>
+            </footer>
+          </blockquote>
+          <blockquote class="flex flex-col rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="text-amber-500" aria-label="5 out of 5 stars">★★★★★</span>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink">"Ben has helped me out on several projects. He is a fast worker and has impressed me every time. Sometimes as a woman it can be difficult to know who you can trust into your own, and I would absolutely say this business is trustworthy and operates with integrity. Will use again."</p>
+            <footer class="mt-5 text-sm">
+              <span class="font-semibold text-ink">Lauren Seifert</span>
+              <span class="block text-ink-faint">Handyman · Google</span>
+            </footer>
+          </blockquote>
+          <blockquote class="flex flex-col rounded-2xl border border-line bg-surface-raised p-6">
+            <span class="text-amber-500" aria-label="5 out of 5 stars">★★★★★</span>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-ink">"Hardworking, friendly, fast. 5 stars isn't enough to describe Load N' Go Junk Removal. You will not be disappointed. Highly recommended."</p>
+            <footer class="mt-5 text-sm">
+              <span class="font-semibold text-ink">JD Sedona</span>
+              <span class="block text-ink-faint">Junk removal · Google</span>
+            </footer>
+          </blockquote>
+        </div>
+
+        <!-- Paste Yelp.com → More → Embed review snippets here. The section stays hidden until it has content. -->
+        <div id="yelp-embeds" class="mt-10 hidden grid gap-4 md:grid-cols-2" hidden></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICE AREA — towns and coverage from the Yelp listing
+         ============================================================ -->
+    <section id="service-area" class="scroll-mt-20 py-20 sm:py-24" aria-labelledby="area-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="reveal grid gap-10 rounded-3xl border border-line bg-surface-raised p-8 shadow-card sm:p-10 lg:grid-cols-2 lg:items-center lg:p-14">
+          <div>
+            <h2 id="area-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Where we work</h2>
+            <p class="mt-4 text-lg text-ink-soft">We serve homeowners and small properties around Monmouth, Oregon, including Salem, Dallas, Albany, Corvallis, and McMinnville. Not sure if you're in range? Send your address and we'll tell you right away.</p>
+            <ul class="mt-6 grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-ink-soft sm:grid-cols-3">
+              <li>Monmouth</li><li>Salem</li><li>Dallas</li>
+              <li>Albany</li><li>Corvallis</li><li>McMinnville</li>
+              <li>and nearby</li>
+            </ul>
+            <a href="#quote" class="btn-secondary mt-8">Check your address</a>
+          </div>
+          <!-- Coverage polygon matches the Yelp listing at /map/load-n-go-monmouth-2 -->
+          <div class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line bg-surface-sunken">
+            <div id="service-area-map" class="absolute inset-0" role="region" aria-label="Map of the Load N' Go service area covering Monmouth, Salem, Dallas, Albany, Corvallis, and McMinnville, Oregon."></div>
+            <noscript>
+              <a href="https://www.yelp.com/map/load-n-go-monmouth-2" target="_blank" rel="noopener noreferrer" class="absolute inset-0 grid place-items-center bg-surface-sunken px-6 text-center text-sm font-medium text-ink">
+                Open the service area map on Yelp
+              </a>
+            </noscript>
+            <a href="https://www.yelp.com/map/load-n-go-monmouth-2" target="_blank" rel="noopener noreferrer" class="absolute bottom-3 left-3 z-[500] rounded-lg border border-line bg-surface-raised px-3 py-1.5 text-xs font-semibold text-ink shadow-card transition-colors hover:border-ink-faint" aria-label="View service area on Yelp (opens in a new tab)">
+              View on Yelp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT / FREE QUOTE
+         Form posts nowhere by default. Set the `action` to a Formspree,
+         Basin, or Cloudflare Worker endpoint, or wire up the fetch() in JS.
+         ============================================================ -->
+    <section id="quote" class="scroll-mt-20 bg-surface-sunken py-20 sm:py-24" aria-labelledby="quote-heading">
+      <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+
+          <div class="reveal lg:col-span-5">
+            <h2 id="quote-heading" class="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Get a free quote</h2>
+            <p class="mt-4 text-lg text-ink-soft">Tell us what you need and we'll reply within one business day. Prefer to talk? Call or text anytime during work hours.</p>
+
+            <div class="mt-8 space-y-4">
+              <a href="tel:+14253503046" class="flex items-center gap-4 rounded-2xl border border-line bg-surface-raised p-4 transition-colors hover:border-accent-500/50">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg>
+                </span>
+                <span>
+                  <span class="block text-sm text-ink-faint">Call or text</span>
+                  <span class="block text-lg font-semibold text-ink">(425) 350-3046</span>
+                </span>
+              </a>
+              <a href="mailto:loadngojunkremoval1@gmail.com" class="flex items-center gap-4 rounded-2xl border border-line bg-surface-raised p-4 transition-colors hover:border-accent-500/50">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                </span>
+                <span>
+                  <span class="block text-sm text-ink-faint">Email</span>
+                  <span class="block text-lg font-semibold text-ink">loadngojunkremoval1@gmail.com</span>
+                </span>
+              </a>
+              <div class="flex items-center gap-4 rounded-2xl border border-line bg-surface-raised p-4">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent-600 dark:text-accent-900" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+                <span>
+                  <span class="block text-sm text-ink-faint">Hours</span>
+                  <span class="block text-lg font-semibold text-ink">Mon–Sat, 7am–6pm</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <form id="quote-form" class="reveal rounded-3xl border border-line bg-surface-raised p-6 shadow-card sm:p-8 lg:col-span-7" action="#" method="POST" novalidate>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="label">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required class="field" placeholder="Jane Doe" />
+                <p class="error mt-1.5 hidden text-xs text-red-600 dark:text-red-400" id="name-error">Please enter your name.</p>
+              </div>
+              <div>
+                <label for="phone" class="label">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required class="field" placeholder="(555) 555-5555" />
+                <p class="error mt-1.5 hidden text-xs text-red-600 dark:text-red-400" id="phone-error">Please enter a valid phone number.</p>
+              </div>
+              <div>
+                <label for="email" class="label">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required class="field" placeholder="you@example.com" />
+                <p class="error mt-1.5 hidden text-xs text-red-600 dark:text-red-400" id="email-error">Please enter a valid email address.</p>
+              </div>
+              <div>
+                <label for="service" class="label">Service needed</label>
+                <select id="service" name="service" required class="field">
+                  <option value="" disabled selected>Choose a service</option>
+                  <option>Fence building &amp; repair</option>
+                  <option>Tree &amp; stump removal</option>
+                  <option>Sod, mulch &amp; gravel</option>
+                  <option>Landscape design</option>
+                  <option>Pressure washing</option>
+                  <option>General handyman</option>
+                  <option>Something else</option>
+                </select>
+                <p class="error mt-1.5 hidden text-xs text-red-600 dark:text-red-400" id="service-error">Please choose a service.</p>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="message" class="label">Tell us about the project</label>
+                <textarea id="message" name="message" rows="4" class="field resize-y" placeholder="Rough size, location on the property, timeline, anything else that helps us quote accurately."></textarea>
+              </div>
+              <!-- Honeypot anti-spam field: hidden from humans, bots fill it in -->
+              <div class="hidden" aria-hidden="true">
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-xs text-ink-faint">We'll only use this to respond to your request. No spam, no lists.</p>
+              <button type="submit" class="btn-primary px-6 py-3.5 text-base sm:min-w-[11rem]">
+                <span class="submit-label">Send quote request</span>
+                <span class="submit-spinner hidden h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <!-- Status messages -->
+            <p id="form-success" class="mt-4 hidden rounded-xl bg-accent-50 px-4 py-3 text-sm font-medium text-accent-700 dark:text-accent-900" role="status">Request sent. We'll get back to you within one business day.</p>
+            <p id="form-failure" class="mt-4 hidden rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-950/40 dark:text-red-300" role="alert">Something went wrong sending the form. Call us at (425) 350-3046 instead.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="border-t border-line bg-surface">
+    <div class="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid gap-10 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <a href="#top" class="inline-flex rounded-lg" aria-label="Load N' Go — home">
+            <span class="brand-logo-wrap brand-logo-wrap--lg">
+              <img src="images/logo.png" alt="Load N' Go Junk Removal" width="387" height="295" class="brand-logo" />
+            </span>
+          </a>
+          <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">Fences, trees, landscaping, pressure washing, and handyman work for Monmouth, Oregon and the surrounding area.</p>
+          <!-- Facebook still a placeholder. Google and Yelp hrefs follow #reviews data-* URLs. -->
+          <div class="mt-5 flex gap-2">
+            <a href="#" class="grid h-10 w-10 place-items-center rounded-xl border border-line text-ink-soft transition-colors hover:border-ink-faint hover:text-ink" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.3c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.4H7.4V14h2.8v8z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/loadngojunkremoval1/" target="_blank" rel="noopener noreferrer" class="grid h-10 w-10 place-items-center rounded-xl border border-line text-ink-soft transition-colors hover:border-ink-faint hover:text-ink" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            </a>
+            <a id="footer-google" href="https://maps.app.goo.gl/DXfTBZzLSrAyWY1s5" target="_blank" rel="noopener noreferrer" class="grid h-10 w-10 place-items-center rounded-xl border border-line text-ink-soft transition-colors hover:border-ink-faint hover:text-ink" aria-label="Google reviews (opens in a new tab)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 12h-9"/></svg>
+            </a>
+            <a id="footer-yelp" href="https://www.yelp.com/biz/load-n-go-monmouth-2" target="_blank" rel="noopener noreferrer" class="grid h-10 w-10 place-items-center rounded-xl border border-line text-ink-soft transition-colors hover:border-ink-faint hover:text-ink" aria-label="Yelp reviews (opens in a new tab)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M5.6 6.2 18.4 17.8M3 12h18M5.6 17.8 18.4 6.2"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <nav class="md:col-span-3" aria-label="Footer">
+          <h2 class="text-sm font-semibold text-ink">Quick links</h2>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#services" class="text-ink-soft transition-colors hover:text-ink">Services</a></li>
+            <li><a href="#work" class="text-ink-soft transition-colors hover:text-ink">Work</a></li>
+            <li><a href="#why-us" class="text-ink-soft transition-colors hover:text-ink">Why us</a></li>
+            <li><a href="#process" class="text-ink-soft transition-colors hover:text-ink">How it works</a></li>
+            <li><a href="#reviews" class="text-ink-soft transition-colors hover:text-ink">Reviews</a></li>
+            <li><a href="#quote" class="text-ink-soft transition-colors hover:text-ink">Free quote</a></li>
+          </ul>
+        </nav>
+
+        <div class="md:col-span-4">
+          <h2 class="text-sm font-semibold text-ink">Contact</h2>
+          <ul class="mt-4 space-y-2.5 text-sm text-ink-soft">
+            <li><a href="tel:+14253503046" class="font-semibold text-ink transition-colors hover:text-accent-600">(425) 350-3046</a></li>
+            <li><a href="mailto:loadngojunkremoval1@gmail.com" class="transition-colors hover:text-ink">loadngojunkremoval1@gmail.com</a></li>
+            <li>Mon–Sat, 7am–6pm</li>
+            <li>Serving Monmouth, Oregon and nearby towns</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col gap-3 border-t border-line pt-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+        <p>&copy; <span id="year">2026</span> Load N' Go. All rights reserved.</p>
+        <p><a href="#" class="hover:text-ink">Privacy</a> <span aria-hidden="true" class="mx-2">/</span> <a href="#" class="hover:text-ink">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="work-lightbox" aria-labelledby="work-lightbox-caption">
+    <div class="flex items-start justify-between gap-3">
+      <p id="work-lightbox-caption" class="min-w-0 flex-1 text-sm font-medium text-ink"></p>
+      <button type="button" class="btn-ghost h-10 w-10 shrink-0 !px-0 rounded-xl" data-work-close aria-label="Close photo">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <img id="work-lightbox-img" alt="" width="1500" height="2000" />
+    <div class="mt-3 flex items-center justify-between gap-2">
+      <button type="button" class="btn-secondary py-2 text-sm" data-work-prev>Previous photo</button>
+      <button type="button" class="btn-secondary py-2 text-sm" data-work-next>Next photo</button>
+    </div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

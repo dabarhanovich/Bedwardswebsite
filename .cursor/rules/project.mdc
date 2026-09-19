@@ -1,0 +1,7 @@
+---
+description: Project conventions for the Load N' Go static site (stack, tokens, placeholders)
+globs:
+alwaysApply: true
+---
+
+Read and follow @AGENTS.md before making changes to this project.
